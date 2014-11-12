@@ -18,8 +18,11 @@ public class Generators {
 	private static final String host = "http://eu.battle.net/api/";
 	private static final Lists lists = Lists.getInstance();
 	private Character character = Character.getInstance();
+	private String backgroudImage = "1.png";
 
-	private Generators() {}
+	private Generators() {
+
+	}
 
 	public static Generators getInstance() {
 		return singleton;
@@ -37,6 +40,7 @@ public class Generators {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+
 		JsonReader jsonReader = Json.createReader(is);
 		JsonObject jsonObject = jsonReader.readObject();
 		JsonObject guild = jsonObject.getJsonObject("guild");
@@ -80,7 +84,7 @@ public class Generators {
 	}
 
 	public BufferedImage generateImage() {
-		URL url = DataPkg.class.getResource("1.png");
+		URL url = DataPkg.class.getResource(backgroudImage);
 		String result;
 		BufferedImage image = null;
 		if (url == null){
@@ -140,5 +144,9 @@ public class Generators {
 	}
 	public void setRealm(String realm){
 		character.setRealm(realm);
+	}
+
+	public void setBackgroudImage(String backgroudImage) {
+		this.backgroudImage = backgroudImage;
 	}
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -13,9 +16,12 @@
       </Pane>
    </top>
    <center>
-      <ScrollPane hmin="500.0" prefHeight="364.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <ScrollPane hmin="500.0" prefHeight="337.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="521.0" prefWidth="583.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="583.0">
+               <children>
+                  <VBox fx:id="bgvbox" prefHeight="120.0" prefWidth="584.0" />
+               </children></AnchorPane>
         </content>
       </ScrollPane>
    </center>
