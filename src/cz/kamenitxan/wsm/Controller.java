@@ -6,29 +6,30 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
-public class Controller extends Pane {
+public class Controller {
 	private Generators generators;
 
 	public Controller() {
 		generators = Generators.getInstance();
 	}
 
-
 	@FXML
 	private Label progres;
-
 	@FXML
 	private TextField name;
-
 	@FXML
 	private TextField realm;
-
 	@FXML
 	private ImageView image;
+
+
+	@FXML
+	private void handleBgChoseButtonAction() {
+		VistaNavigator.loadVista(VistaNavigator.VISTA_1);
+	}
 
 	@FXML
 	private void handlePreviewButtonAction() {
@@ -53,4 +54,6 @@ public class Controller extends Pane {
 	public void setProgres(String string) {
 		progres.setText(string);
 	}
+
+
 }

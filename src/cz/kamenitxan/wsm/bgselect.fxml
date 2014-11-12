@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.BgSelectController">
+   <top>
+      <Pane prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="bgsel_close" layoutX="534.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#handleBgSelectCloseButtonAction" text="Close" />
+            <Label layoutX="14.0" layoutY="12.0" text="Doubleclick on image to select" />
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <ScrollPane hmin="500.0" prefHeight="364.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="521.0" prefWidth="583.0" />
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

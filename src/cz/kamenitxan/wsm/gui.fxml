@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -34,5 +35,6 @@
       <TextField fx:id="realm" layoutX="333.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Thunderhorn" />
       <Label layoutX="17.0" layoutY="324.0" text="Postup" />
       <Label fx:id="progres" layoutX="75.0" layoutY="324.0" text="Label" />
+      <Button fx:id="bg_chose" layoutX="17.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="Vybrat pozadí" />
    </children>
 </Pane>
