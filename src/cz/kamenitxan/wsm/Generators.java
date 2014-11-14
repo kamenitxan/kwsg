@@ -29,13 +29,23 @@ public class Generators {
 	}
 
 	public String requestData() {
+		if (lastName.equals(character.getName()) & lastRealm.equals(character.getRealm())) {
+			return "ok";
+		}
+
+		lastName = character.getName();
+		lastRealm = character.getRealm();
+
 		InputStream is = null;
 		try{
 			URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
-					"?fields=guild,items,titles,talents");
+					"?fields=guild,items,titles,talents,professions");
 			is = url.openStream();
-		} catch (FileNotFoundException ex){
+		} catch (FileNotFoundException ex) {
 			String error = "Postava: " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
+			System.out.println(error);
+		} catch (IOException ex) {
+			String error = ex.getLocalizedMessage();
 			System.out.println(error);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -130,7 +140,7 @@ public class Generators {
 		g.dispose();
 
 		try {
-			ImageIO.write(image, "png", new File("test.png"));
+			ImageIO.write(image, "png", new File(character.getName() + ".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
