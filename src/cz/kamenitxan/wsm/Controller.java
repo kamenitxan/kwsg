@@ -47,6 +47,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Show image in UI window
+	 * @param image generated image
+	 */
 	public void setImage(Image image) {
 		this.image.setImage(image);
 	}

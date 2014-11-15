@@ -19,6 +19,8 @@ public class Generators {
 	private static final Lists lists = Lists.getInstance();
 	private Character character = Character.getInstance();
 	private String backgroudImage = "1.png";
+	private String lastName = "";
+	private String lastRealm = "";
 
 	private Generators() {
 
@@ -28,6 +30,10 @@ public class Generators {
 		return singleton;
 	}
 
+	/**
+	 * Gets character data from Blizzard API and stores it in Character class
+	 * @return status of request. "ok" is success.
+	 */
 	public String requestData() {
 		if (lastName.equals(character.getName()) & lastRealm.equals(character.getRealm())) {
 			return "ok";
@@ -51,6 +57,7 @@ public class Generators {
 			ex.printStackTrace();
 		}
 
+		// FIX: ošetření, když nejde internet
 		JsonReader jsonReader = Json.createReader(is);
 		JsonObject jsonObject = jsonReader.readObject();
 		JsonObject guild = jsonObject.getJsonObject("guild");
@@ -64,6 +71,9 @@ public class Generators {
 			spec = talents.getJsonObject(1);
 			spec = spec.getJsonObject("spec");
 		}
+		JsonObject professions = jsonObject.getJsonObject("professions");
+		JsonObject primary_prof = professions.getJsonArray("primary").getJsonObject(0);
+		JsonObject secondary_prof = professions.getJsonArray("primary").getJsonObject(1);
 
 
 		jsonReader.close();
@@ -84,6 +94,11 @@ public class Generators {
 				character.setTitle(title.getString("name"));
 			}
 		}
+		character.setPrimaryProf(primary_prof.getString("name"));
+		character.setPrimaryProfLvl(primary_prof.getInt("rank"));
+		character.setSecondaryProf(secondary_prof.getString("name"));
+		character.setSecondaryProfLvl(secondary_prof.getInt("rank"));
+
 		System.out.println(jsonObject.toString());
 
 		if (character.getTitle() == null) {
@@ -93,16 +108,24 @@ public class Generators {
 		return "ok";
 	}
 
+	/**
+	 * Generates image from character class data a saves it to HDD.
+	 * @return generated image
+	 */
 	public BufferedImage generateImage() {
 		URL url = DataPkg.class.getResource(backgroudImage);
+		URL pp = DataPkg.class.getResource(character.getPrimaryProf() + ".jpeg");
+		URL sp = DataPkg.class.getResource(character.getSecondaryProf() + ".jpeg");
 		String result;
-		BufferedImage image = null;
+		BufferedImage image = null, primaryProfImg = null, secondaryProfImg = null;
 		if (url == null){
 			result = "CHYBA";
 		} else {
 			result = "ok";
 			try {
 				image = ImageIO.read(url);
+				primaryProfImg = ImageIO.read(pp);
+				secondaryProfImg = ImageIO.read(sp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -118,7 +141,13 @@ public class Generators {
 		g.drawString(String.valueOf(character.getLvl()) ,   5, 77);
 		g.drawString(String.valueOf(character.getIlvl()), 410, 77);
 		g.setFont(g.getFont().deriveFont(14f));
-		g.drawString(character.getSpec() + " " + lists.getPClass(character.getPlayerClass()) + " of " + character.getGuild(), 90, 77);
+		g.drawString("lvl " + character.getLvl() + " " + character.getSpec() + " " +
+				lists.getPClass(character.getPlayerClass()) + " of " + character.getGuild(), 90, 77);
+		g.drawString(String.valueOf(character.getPrimaryProfLvl()), 405, 15);
+		g.drawImage(primaryProfImg, 432, 3, null);
+		g.drawString(String.valueOf(character.getSecondaryProfLvl()), 405, 33);
+		g.drawImage(secondaryProfImg, 432, 18, null);
+
 		URL avatarUrl = null;
 		java.awt.Image avatar = null;
 		try {
@@ -149,13 +178,26 @@ public class Generators {
 		return image;
 	}
 
+	/**
+	 * Sets name of character. before queriyng Blizzard API
+	 * @param name of the character
+	 */
 	public void setName(String name){
 		character.setName(name);
 	}
+
+	/**
+	 * Sets name of realm. before queriyng Blizzard API
+	 * @param realm of the character
+	 */
 	public void setRealm(String realm){
 		character.setRealm(realm);
 	}
 
+	/**
+	 * Sets name of selected background image
+	 * @param backgroudImage filename of background image
+	 */
 	public void setBackgroudImage(String backgroudImage) {
 		this.backgroudImage = backgroudImage;
 	}

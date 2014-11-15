@@ -20,12 +20,21 @@ public class Lists {
 		classes.put(9, "Warlock");
 		classes.put(10, "Monk");
 		classes.put(11, "Druid");
+
 	}
 
+	/**
+	 * @return singleton of Lists
+	 */
 	public static Lists getInstance() {
 		return singleton;
 	}
 
+	/**
+	 * Gets class name from API id
+	 * @param i id
+	 * @return class name
+	 */
 	public String getPClass(int i){
 		return classes.get(i);
 	}

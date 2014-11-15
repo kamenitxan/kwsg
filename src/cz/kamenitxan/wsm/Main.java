@@ -13,9 +13,6 @@ import java.io.IOException;
 @SuppressWarnings("HardcodedFileSeparator")
 public class Main extends Application {
 
-	private Controller controller = null;
-
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setScene(

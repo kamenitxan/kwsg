@@ -8,6 +8,10 @@ public class Character {
 	private String guild = "";
 	private String title = null;
 	private String spec = null;
+	private String primaryProf = null;
+	private int primaryProfLvl = 0;
+	private String secondaryProf = null;
+	private int secondaryProfLvl = 0;
 	private int lvl = 0;
 	private int ilvl = 0;
 	private int playerClass = 0;
@@ -111,9 +115,43 @@ public class Character {
 		this.spec = spec;
 	}
 
+	public String getPrimaryProf() {
+		return primaryProf;
+	}
+
+	public void setPrimaryProf(String primaryProf) {
+		this.primaryProf = primaryProf;
+	}
+
+	public String getSecondaryProf() {
+		return secondaryProf;
+	}
+
+	public void setSecondaryProf(String secondaryProf) {
+		this.secondaryProf = secondaryProf;
+	}
+
+	public int getPrimaryProfLvl() {
+		return primaryProfLvl;
+	}
+
+	public void setPrimaryProfLvl(int primaryProfLvl) {
+		this.primaryProfLvl = primaryProfLvl;
+	}
+
+	public int getSecondaryProfLvl() {
+		return secondaryProfLvl;
+	}
+
+	public void setSecondaryProfLvl(int secondaryProfLvl) {
+		this.secondaryProfLvl = secondaryProfLvl;
+	}
 
 	private Character() {}
 
+	/**
+	 * @return Singleton of Character
+	 */
 	public static Character getInstance( ) {
 		return singleton;
 	}
