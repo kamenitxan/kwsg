@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class TextMode {
 
+	/**
+	 * Generates image from terminal.
+	 * @param args ["name", "realm"]
+	 */
 	public TextMode(String[] args) {
 		Character character = Character.getInstance();
 		character.setName(args[0]);

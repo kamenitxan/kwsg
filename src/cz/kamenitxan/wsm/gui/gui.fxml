@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.gui.Controller">
    <children>
       <Button layoutX="517.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="Náhled" />
       <Button layoutX="252.0" layoutY="346.0" mnemonicParsing="false" text="Vygenerovat" />

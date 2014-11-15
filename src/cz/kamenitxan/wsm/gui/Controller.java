@@ -1,5 +1,7 @@
-package cz.kamenitxan.wsm;
+package cz.kamenitxan.wsm.gui;
 
+import cz.kamenitxan.wsm.Generators;
+import cz.kamenitxan.wsm.VistaNavigator;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

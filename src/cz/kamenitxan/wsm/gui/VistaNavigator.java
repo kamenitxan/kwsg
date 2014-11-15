@@ -1,4 +1,4 @@
-package cz.kamenitxan.wsm;
+package cz.kamenitxan.wsm.gui;
 
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
