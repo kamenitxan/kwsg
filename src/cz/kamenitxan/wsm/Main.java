@@ -1,6 +1,8 @@
 package cz.kamenitxan.wsm;
 
 import com.aquafx_project.AquaFx;
+import cz.kamenitxan.wsm.gui.MainController;
+import cz.kamenitxan.wsm.gui.VistaNavigator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -41,7 +43,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 
 		Pane mainPane = loader.load(
-				getClass().getResourceAsStream(VistaNavigator.MAIN)
+				VistaNavigator.class.getResourceAsStream(VistaNavigator.MAIN)
 		);
 		MainController mainController = loader.getController();
 
