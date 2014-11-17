@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javafx.scene.control.Alert;
 import javafx.scene.paint.*;
 
 public class Generators {
@@ -52,11 +54,29 @@ public class Generators {
 					"?fields=guild,items,titles,talents,professions");
 			is = url.openStream();
 		} catch (FileNotFoundException ex) {
+			System.out.println(ex.getLocalizedMessage());
+			System.out.println(ex.getMessage());
 			String error = "Postava: " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
 			System.out.println(error);
+
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Postava nenalezena");
+			alert.setHeaderText("404: Postava nenalezena");
+			alert.setContentText(error);
+			alert.showAndWait();
+
+			return error;
 		} catch (IOException ex) {
 			String error = ex.getLocalizedMessage();
 			System.out.println(error);
+
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setTitle("Chyba API");
+			alert.setHeaderText("50x: Chyba v API");
+			alert.setContentText(error);
+			alert.showAndWait();
+
+			return error;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

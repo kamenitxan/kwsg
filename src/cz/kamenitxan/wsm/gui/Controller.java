@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.Objects;
@@ -54,10 +53,10 @@ public class Controller implements Initializable {
 		if (!Objects.equals(getStatus, "ok")) {
 			setProgres(getStatus);
 		} else {
+			progres.setText("Údaje načtecy");
 			BufferedImage imageAwt = generators.generateImage(save);
 			setImage(SwingFXUtils.toFXImage(imageAwt, null));
 		}
-		progres.setText("Údaje načtecy");
 		System.out.println(name.getText());
 
 	}
