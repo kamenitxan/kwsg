@@ -116,7 +116,7 @@ public class Generators {
 	 * Generates image from character class data a saves it to HDD.
 	 * @return generated image
 	 */
-	public BufferedImage generateImage() {
+	public BufferedImage generateImage(boolean save) {
 		URL url = DataPkg.class.getResource(backgroudImage);
 		URL pp = DataPkg.class.getResource(character.getPrimaryProf() + ".jpeg");
 		URL sp = DataPkg.class.getResource(character.getSecondaryProf() + ".jpeg");
@@ -176,12 +176,14 @@ public class Generators {
 		g.drawImage(avatar, 0, 0, 80, 80, null);
 		g.dispose();
 
-		try {
-			ImageIO.write(image, "png", new File(character.getName() + ".png"));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (save) {
+			try {
+				ImageIO.write(image, "png", new File(character.getName() + ".png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println(result + " - obrázek uložen ");
 		}
-		System.out.println(result + " - obrázek uložen ");
 
 		return image;
 	}

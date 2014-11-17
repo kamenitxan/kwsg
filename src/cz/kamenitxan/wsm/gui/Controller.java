@@ -40,20 +40,31 @@ public class Controller implements Initializable {
 		VistaNavigator.loadVista(VistaNavigator.VISTA_1);
 	}
 
+
 	@FXML
 	private void handlePreviewButtonAction() {
+		handlePreviewButtonAction(false);
+	}
+
+	@FXML
+	private void handlePreviewButtonAction(boolean save) {
 		generators.setName(name.getText());
 		generators.setRealm(realm.getText());
 		String getStatus = generators.requestData();
 		if (!Objects.equals(getStatus, "ok")) {
 			setProgres(getStatus);
 		} else {
-			BufferedImage imageAwt = generators.generateImage();
+			BufferedImage imageAwt = generators.generateImage(save);
 			setImage(SwingFXUtils.toFXImage(imageAwt, null));
 		}
 		progres.setText("Údaje načtecy");
 		System.out.println(name.getText());
 
+	}
+
+	@FXML
+	private void handleGenerateButtonAction() {
+		handlePreviewButtonAction(true);
 	}
 
 	@FXML
@@ -78,6 +89,6 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		java.awt.Color c = Generators.getInstance().getFontColor();
-		colorPicker.setValue(Color.rgb((int) c.getRed(),(int) c.getGreen(),(int) c.getBlue()));
+		colorPicker.setValue(Color.rgb((int) c.getRed(), (int) c.getGreen(), (int) c.getBlue()));
 	}
 }

@@ -18,7 +18,7 @@ public class TextMode {
 		if (!Objects.equals(getStatus, "ok")) {
 			System.out.println(getStatus);
 		} else {
-			generators.generateImage();
+			generators.generateImage(true);
 		}
 	}
 }

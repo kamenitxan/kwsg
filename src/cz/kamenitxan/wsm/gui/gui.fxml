@@ -8,7 +8,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.gui.Controller">
    <children>
       <Button layoutX="517.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="Náhled" />
-      <Button layoutX="252.0" layoutY="346.0" mnemonicParsing="false" text="Vygenerovat" />
+      <Button layoutX="252.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="Vygenerovat" />
       <ImageView fx:id="image" fitHeight="80.0" fitWidth="450.0" layoutX="75.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="name" layoutX="61.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Kamenitxania" />
       <MenuBar prefHeight="29.0" prefWidth="600.0">
