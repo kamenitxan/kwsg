@@ -41,12 +41,12 @@ public class BgSelectController implements Initializable{
 		URL url;
 		ImageView image;
 
-		for (int i = 1; i <= 7; i++) {
+		for (int i = 1; i <= 10; i++) {
 			url = DataPkg.class.getResource(i + ".png");
 			image = new ImageView(String.valueOf(url));
 			image.setId(String.valueOf(i));
 			bgvbox.getChildren().add(image);
-			bgvbox.setPrefHeight(bgvbox.getPrefHeight()+80);
+			bgvbox.setPrefHeight(bgvbox.getPrefHeight()+60);
 		}
 		for (Node node : bgvbox.getChildren()) {
 			node.setOnMouseClicked((event) -> handleBgChooseImageAction(node.getId()));
