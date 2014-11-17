@@ -2,9 +2,11 @@ package cz.kamenitxan.wsm;
 
 import cz.kamenitxan.wsm.images.DataPkg;
 
+
 import javax.imageio.ImageIO;
 import javax.json.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javafx.scene.paint.*;
 
 public class Generators {
 	private static Generators singleton = new Generators();
@@ -21,6 +24,7 @@ public class Generators {
 	private String backgroudImage = "1.png";
 	private String lastName = "";
 	private String lastRealm = "";
+	private Color fontColor = new Color(255, 255, 255);
 
 	private Generators() {
 
@@ -135,18 +139,22 @@ public class Generators {
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setFont(new Font("Helvetica", Font.PLAIN, 28));
 		g.setFont(g.getFont().deriveFont(28f));
+		g.setColor(fontColor);
 		g.drawString(character.getName(), 90, 30);
 		g.setFont(g.getFont().deriveFont(17f));
 		g.drawString(character.getTitle().replace("%s, ", "").replace("%s ", ""), 90, 50);
+		g.drawString(String.valueOf(character.getPrimaryProfLvl()), 405, 15);
+		g.drawImage(primaryProfImg, 432, 3, null);
+		g.drawString(String.valueOf(character.getSecondaryProfLvl()), 405, 33);
+		g.drawImage(secondaryProfImg, 432, 18, null);
+
+		// white text on bottom line
+		g.setColor(Color.WHITE);
 		g.drawString(String.valueOf(character.getLvl()) ,   5, 77);
 		g.drawString(String.valueOf(character.getIlvl()), 410, 77);
 		g.setFont(g.getFont().deriveFont(14f));
 		g.drawString("lvl " + character.getLvl() + " " + character.getSpec() + " " +
 				lists.getPClass(character.getPlayerClass()) + " of " + character.getGuild(), 90, 77);
-		g.drawString(String.valueOf(character.getPrimaryProfLvl()), 405, 15);
-		g.drawImage(primaryProfImg, 432, 3, null);
-		g.drawString(String.valueOf(character.getSecondaryProfLvl()), 405, 33);
-		g.drawImage(secondaryProfImg, 432, 18, null);
 
 		URL avatarUrl = null;
 		java.awt.Image avatar = null;
@@ -194,10 +202,19 @@ public class Generators {
 		character.setRealm(realm);
 	}
 
+	public void setFontColor(Color fontColor) {
+		this.fontColor = fontColor;
+	}
+
+	public Color getFontColor() {
+		return fontColor;
+	}
+
 	/**
 	 * Sets name of selected background image
 	 * @param backgroudImage filename of background image
 	 */
+
 	public void setBackgroudImage(String backgroudImage) {
 		this.backgroudImage = backgroudImage;
 	}

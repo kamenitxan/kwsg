@@ -3,14 +3,20 @@ package cz.kamenitxan.wsm.gui;
 import cz.kamenitxan.wsm.Generators;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.awt.image.BufferedImage;
-import java.util.Objects;
+import javafx.scene.paint.Color;
 
-public class Controller {
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
 	private Generators generators;
 
 	public Controller() {
@@ -25,6 +31,8 @@ public class Controller {
 	private TextField realm;
 	@FXML
 	private ImageView image;
+	@FXML
+	private ColorPicker colorPicker;
 
 
 	@FXML
@@ -48,6 +56,12 @@ public class Controller {
 
 	}
 
+	@FXML
+	private void handleColorPickerAction() {
+		Color c = colorPicker.getValue();
+		generators.setFontColor(new java.awt.Color((float) c.getRed(),(float) c.getGreen(),(float) c.getBlue()));
+	}
+
 	/**
 	 * Show image in UI window
 	 * @param image generated image
@@ -61,4 +75,9 @@ public class Controller {
 	}
 
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		java.awt.Color c = Generators.getInstance().getFontColor();
+		colorPicker.setValue(Color.rgb((int) c.getRed(),(int) c.getGreen(),(int) c.getBlue()));
+	}
 }

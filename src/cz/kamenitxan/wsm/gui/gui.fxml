@@ -36,5 +36,7 @@
       <Label layoutX="17.0" layoutY="324.0" text="Postup" />
       <Label fx:id="progres" layoutX="75.0" layoutY="324.0" text="Label" />
       <Button fx:id="bg_chose" layoutX="17.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="Vybrat pozadí" />
+      <ColorPicker fx:id="colorPicker" layoutX="244.0" layoutY="71.0" onAction="#handleColorPickerAction" />
+      <Label layoutX="158.0" layoutY="76.0" text="Barva písma" />
    </children>
 </Pane>
