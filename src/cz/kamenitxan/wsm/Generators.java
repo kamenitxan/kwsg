@@ -58,6 +58,7 @@ public class Generators {
 			System.out.println(ex.getMessage());
 			String error = "Postava: " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
 			System.out.println(error);
+			lastName = "";
 
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Postava nenalezena");
@@ -69,6 +70,7 @@ public class Generators {
 		} catch (IOException ex) {
 			String error = ex.getLocalizedMessage();
 			System.out.println(error);
+			lastName = "";
 
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Chyba API");
