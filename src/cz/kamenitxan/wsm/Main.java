@@ -26,7 +26,8 @@ public class Main extends Application {
 		if(System.getProperty("os.name").equals("Mac OS X")){
 			AquaFx.style();
 		}
-
+	primaryStage.setTitle("Kamenitxan's signature generator");
+	primaryStage.setResizable(false);
 	primaryStage.show();
 
 	}
