@@ -5,38 +5,35 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.gui.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.gui.Controller">
    <children>
-      <Button layoutX="517.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="Náhled" />
-      <Button layoutX="252.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="Vygenerovat" />
-      <ImageView fx:id="image" fitHeight="80.0" fitWidth="450.0" layoutX="75.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="207.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="Náhled" />
+      <Button layoutX="191.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="Vygenerovat" />
+      <ImageView fx:id="image" fitHeight="80.0" fitWidth="450.0" layoutX="10.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="name" layoutX="61.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Kamenitxania" />
-      <MenuBar prefHeight="29.0" prefWidth="600.0">
+      <MenuBar prefHeight="29.0" prefWidth="470.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Nastavení">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#menuFolderChooseAction" text="Uložit do" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBgChoseButtonAction" text="Vybrat pozadí" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuCharListAction" text="Seznam postav" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Nápověda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#menuAboutAction" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
       <Label layoutX="14.0" layoutY="42.0" text="Jméno" />
-      <Label layoutX="274.0" layoutY="42.0" text="Server" />
-      <TextField fx:id="realm" layoutX="333.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Thunderhorn" />
+      <Label layoutX="14.0" layoutY="76.0" text="Server" />
+      <TextField fx:id="realm" layoutX="61.0" layoutY="71.0" onAction="#handlePreviewButtonAction" text="Thunderhorn" />
       <Label layoutX="17.0" layoutY="324.0" text="Postup" />
       <Label fx:id="progres" layoutX="75.0" layoutY="324.0" text="Label" />
-      <Button fx:id="bg_chose" layoutX="17.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="Vybrat pozadí" />
-      <ColorPicker fx:id="colorPicker" layoutX="244.0" layoutY="71.0" onAction="#handleColorPickerAction" />
-      <Label layoutX="158.0" layoutY="76.0" text="Barva písma" />
+      <Button fx:id="bg_chose" layoutX="343.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="Vybrat pozadí" />
+      <ColorPicker fx:id="colorPicker" layoutX="343.0" layoutY="71.0" onAction="#handleColorPickerAction" prefHeight="26.0" prefWidth="106.0" />
+      <Label layoutX="262.0" layoutY="76.0" text="Barva písma" />
    </children>
 </Pane>

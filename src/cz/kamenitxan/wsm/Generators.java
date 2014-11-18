@@ -14,19 +14,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import javafx.scene.control.Alert;
-import javafx.scene.paint.*;
 
 public class Generators {
 	private static Generators singleton = new Generators();
-	private static final String host = "http://eu.battle.net/api/";
 	private static final Lists lists = Lists.getInstance();
 	private Character character = Character.getInstance();
 	private String backgroudImage = "1.png";
 	private String lastName = "";
 	private String lastRealm = "";
 	private Color fontColor = new Color(255, 255, 255);
+	private String folder = "";
 
 	private Generators() {
 
@@ -50,20 +50,21 @@ public class Generators {
 
 		InputStream is = null;
 		try{
+			String host = "http://eu.battle.net/api/";
 			URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
 					"?fields=guild,items,titles,talents,professions");
 			is = url.openStream();
 		} catch (FileNotFoundException ex) {
 			System.out.println(ex.getLocalizedMessage());
 			System.out.println(ex.getMessage());
-			String error = "Postava: " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
+			String error = "Postava " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
 			System.out.println(error);
 			lastName = "";
 
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Postava nenalezena");
-			alert.setHeaderText("404: Postava nenalezena");
-			alert.setContentText(error);
+			alert.setHeaderText(null);
+			alert.setContentText("Error 404: " + error);
 			alert.showAndWait();
 
 			return error;
@@ -164,7 +165,7 @@ public class Generators {
 		g.setColor(fontColor);
 		g.drawString(character.getName(), 90, 30);
 		g.setFont(g.getFont().deriveFont(17f));
-		g.drawString(character.getTitle().replace("%s, ", "").replace("%s ", ""), 90, 50);
+		g.drawString(character.getTitle().replace("%s, ", "").replace("%s ", "").replace("%s", ""), 90, 50);
 		g.drawString(String.valueOf(character.getPrimaryProfLvl()), 405, 15);
 		g.drawImage(primaryProfImg, 432, 3, null);
 		g.drawString(String.valueOf(character.getSecondaryProfLvl()), 405, 33);
@@ -200,7 +201,12 @@ public class Generators {
 
 		if (save) {
 			try {
-				ImageIO.write(image, "png", new File(character.getName() + ".png"));
+				if (!Objects.equals(folder, "")) {
+					String path = folder + System.getProperty("file.separator") + character.getName() + ".png";
+					ImageIO.write(image, "png", new File(path));
+				} else {
+					ImageIO.write(image, "png", new File(character.getName() + ".png"));
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -232,6 +238,10 @@ public class Generators {
 
 	public Color getFontColor() {
 		return fontColor;
+	}
+
+	public void setFolder(String folder) {
+		this.folder = folder;
 	}
 
 	/**

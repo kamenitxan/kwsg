@@ -14,9 +14,11 @@ import java.io.IOException;
 
 @SuppressWarnings("HardcodedFileSeparator")
 public class Main extends Application {
+	private static Stage primaryStage = null;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		Main.primaryStage = primaryStage;
 		primaryStage.setScene(
 				createScene(
 						loadMainPane()
@@ -64,6 +66,10 @@ public class Main extends Application {
 		return new Scene(
 				mainPane
 		);
+	}
+
+	public static Stage getPrimaryStage() {
+		return primaryStage;
 	}
 
 	public static void main(String[] args) {
