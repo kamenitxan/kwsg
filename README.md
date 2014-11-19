@@ -11,3 +11,5 @@ Run jar from terminal with name and realm as parameters
 Example:
 `java -jar Kamenitxania Thunderhorn`
 
+Javadoc:
+http://kamenitxan.github.io/kwsg/
