@@ -7,33 +7,39 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.wsm.gui.Controller">
    <children>
-      <Button layoutX="207.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="Náhled" />
-      <Button layoutX="191.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="Vygenerovat" />
+      <Button layoutX="207.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="%preview" />
+      <Button layoutX="191.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="%generate" />
       <ImageView fx:id="image" fitHeight="80.0" fitWidth="450.0" layoutX="10.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="name" layoutX="61.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Kamenitxania" />
       <MenuBar prefHeight="29.0" prefWidth="470.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Nastavení">
+          <Menu mnemonicParsing="false" text="%menu_setting">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#menuFolderChooseAction" text="Uložit do" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleBgChoseButtonAction" text="Vybrat pozadí" />
+              <MenuItem mnemonicParsing="false" onAction="#menuFolderChooseAction" text="%menu_saveto" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBgChoseButtonAction" text="%bg_choose" />
                   <MenuItem mnemonicParsing="false" onAction="#menuCharListAction" text="Seznam postav" />
+                  <Menu mnemonicParsing="false" text="%menu_language">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#menuLanguageCsAction" text="%cs" />
+                      <MenuItem mnemonicParsing="false" onAction="#menuLanguageEnAction" text="%en" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Nápověda">
+          <Menu mnemonicParsing="false" text="%menu_help">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#menuAboutAction" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <Label layoutX="14.0" layoutY="42.0" text="Jméno" />
-      <Label layoutX="14.0" layoutY="76.0" text="Server" />
+      <Label layoutX="14.0" layoutY="42.0" text="%name" />
+      <Label layoutX="14.0" layoutY="76.0" text="%server" />
       <TextField fx:id="realm" layoutX="61.0" layoutY="71.0" onAction="#handlePreviewButtonAction" text="Thunderhorn" />
-      <Label layoutX="17.0" layoutY="324.0" text="Postup" />
+      <Label layoutX="17.0" layoutY="324.0" text="%progress" />
       <Label fx:id="progres" layoutX="75.0" layoutY="324.0" text="Label" />
-      <Button fx:id="bg_chose" layoutX="343.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="Vybrat pozadí" />
+      <Button fx:id="bg_chose" layoutX="343.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#handleBgChoseButtonAction" text="%bg_choose" />
       <ColorPicker fx:id="colorPicker" layoutX="343.0" layoutY="71.0" onAction="#handleColorPickerAction" prefHeight="26.0" prefWidth="106.0" />
-      <Label layoutX="262.0" layoutY="76.0" text="Barva písma" />
+      <Label layoutX="262.0" layoutY="76.0" text="%font_color" />
    </children>
 </Pane>

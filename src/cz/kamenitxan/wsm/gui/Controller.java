@@ -102,6 +102,16 @@ public class Controller implements Initializable {
 
 	@FXML
 	private void menuCharListAction() {
+
+	}
+
+	@FXML
+	private void menuLanguageCsAction() {
+		VistaNavigator.setLocale("cs");
+	}
+	@FXML
+	private void menuLanguageEnAction() {
+		VistaNavigator.setLocale("en");
 	}
 
 	/**
@@ -119,6 +129,7 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		java.awt.Color c = Generators.getInstance().getFontColor();
 		colorPicker.setValue(Color.rgb(c.getRed(), c.getGreen(), c.getBlue()));
 		name.setText(character.getName());
