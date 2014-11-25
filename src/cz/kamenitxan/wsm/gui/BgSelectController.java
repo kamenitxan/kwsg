@@ -35,7 +35,9 @@ public class BgSelectController implements Initializable{
 	}
 
 
-
+	/**
+	 * Fills scene with background images
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		URL url;

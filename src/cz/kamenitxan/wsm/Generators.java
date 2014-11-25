@@ -41,6 +41,7 @@ public class Generators {
 	 * @return status of request. "ok" is success.
 	 */
 	public String requestData() {
+		// TODO: save list of favourite chars
 		if (lastName.equals(character.getName()) & lastRealm.equals(character.getRealm())) {
 			return "ok";
 		}
@@ -137,6 +138,7 @@ public class Generators {
 
 	/**
 	 * Generates image from character class data a saves it to HDD.
+	 * @param save image is saved to HDD if true
 	 * @return generated image
 	 */
 	public BufferedImage generateImage(boolean save) {
@@ -212,7 +214,7 @@ public class Generators {
 			}
 			System.out.println(result + " - obrázek uložen ");
 		}
-
+		// TODO: Save over scp
 		return image;
 	}
 
@@ -232,14 +234,25 @@ public class Generators {
 		character.setRealm(realm);
 	}
 
+	/**
+	 * Sets color of font on image
+	 * @param fontColor java.awt.color
+	 */
 	public void setFontColor(Color fontColor) {
 		this.fontColor = fontColor;
 	}
 
+	/**
+	 * @return current color of font
+	 */
 	public Color getFontColor() {
 		return fontColor;
 	}
 
+	/**
+	 *
+	 * @param folder in which will image be saved
+	 */
 	public void setFolder(String folder) {
 		this.folder = folder;
 	}
@@ -248,7 +261,6 @@ public class Generators {
 	 * Sets name of selected background image
 	 * @param backgroudImage filename of background image
 	 */
-
 	public void setBackgroudImage(String backgroudImage) {
 		this.backgroudImage = backgroudImage;
 	}

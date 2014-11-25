@@ -73,6 +73,7 @@ public class VistaNavigator {
 			e.printStackTrace();
 		}
 	}
+	// TODO: defauld language from system
 	public static void setLocale(String language) {
 		lastLocale = language;
 		loadVista(lastFxml, language);

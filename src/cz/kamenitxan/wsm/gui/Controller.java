@@ -122,6 +122,9 @@ public class Controller implements Initializable {
 		this.image.setImage(image);
 	}
 
+	/**
+	 * @param string status of image generation. Shown in GUI
+	 */
 	public void setProgres(String string) {
 		progres.setText(string);
 	}
@@ -129,7 +132,6 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		java.awt.Color c = Generators.getInstance().getFontColor();
 		colorPicker.setValue(Color.rgb(c.getRed(), c.getGreen(), c.getBlue()));
 		name.setText(character.getName());
