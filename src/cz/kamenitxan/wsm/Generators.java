@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
@@ -50,39 +50,43 @@ public class Generators {
 		lastRealm = character.getRealm();
 
 		InputStream is = null;
-		try{
-			String host = "http://eu.battle.net/api/";
-			URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
-					"?fields=guild,items,titles,talents,professions");
-			is = url.openStream();
-		} catch (FileNotFoundException ex) {
-			System.out.println(ex.getLocalizedMessage());
-			System.out.println(ex.getMessage());
-			String error = "Postava " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
-			System.out.println(error);
-			lastName = "";
+		while (is == null) {
+			try{
+				String host = "http://eu.battle.net/api/";
+				URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
+						"?fields=guild,items,titles,talents,professions");
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setReadTimeout(2000); //2 vteřiny
+				is = con.getInputStream();
+			} catch (FileNotFoundException ex) {
+				System.out.println(ex.getLocalizedMessage());
+				System.out.println(ex.getMessage());
+				String error = "Postava " + character.getName() + " na serveru " + character.getRealm() + " nenalezena";
+				System.out.println(error);
+				lastName = "";
 
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("Postava nenalezena");
-			alert.setHeaderText(null);
-			alert.setContentText("Error 404: " + error);
-			alert.showAndWait();
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Postava nenalezena");
+				alert.setHeaderText(null);
+				alert.setContentText("Error 404: " + error);
+				alert.showAndWait();
 
-			return error;
-		} catch (IOException ex) {
-			String error = ex.getLocalizedMessage();
-			System.out.println(error);
-			lastName = "";
+				return error;
+			} catch (IOException ex) {
+				String error = ex.getLocalizedMessage();
+				System.out.println(error);
+				lastName = "";
 
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setTitle("Chyba API");
-			alert.setHeaderText("50x: Chyba v API");
-			alert.setContentText(error);
-			alert.showAndWait();
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+				alert.setTitle("Chyba API");
+				alert.setHeaderText("50x: Chyba v API");
+				alert.setContentText(error);
+				alert.showAndWait();
 
-			return error;
-		} catch (Exception ex) {
-			ex.printStackTrace();
+				return error;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
 
 		// FIX: ošetření, když nejde internet
@@ -181,23 +185,17 @@ public class Generators {
 		g.drawString("lvl " + character.getLvl() + " " + character.getSpec() + " " +
 				lists.getPClass(character.getPlayerClass()) + " of " + character.getGuild(), 90, 77);
 
-		URL avatarUrl = null;
+		URL avatarUrl;
 		java.awt.Image avatar = null;
 		try {
 			if (character.getAvatar() != null) {
 				avatarUrl = new URL("http://eu.battle.net/static-render/eu/" + character.getAvatar());
-			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		try {
-			if (avatarUrl != null) {
 				avatar = ImageIO.read(avatarUrl);
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		g.drawImage(avatar, 0, 0, 80, 80, null);
 		g.dispose();
 
