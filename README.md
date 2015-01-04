@@ -13,3 +13,6 @@ Example:
 
 Javadoc:
 http://kamenitxan.github.io/kwsg/
+
+Generators class queries data from Blizzard API, creates image (backgrounds are in images package) and saves it to disk.
+Gui package contains gui. I'm using my SceneSwitcher library https://github.com/kamenitxan/SceneSwitcher
