@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,7 +8,7 @@
    <children>
       <Button layoutX="207.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#handlePreviewButtonAction" text="%preview" />
       <Button layoutX="191.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleGenerateButtonAction" text="%generate" />
-      <ImageView fx:id="image" fitHeight="80.0" fitWidth="450.0" layoutX="10.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image" fitHeight="80.0" fitWidth="550.0" layoutX="10.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="name" layoutX="61.0" layoutY="37.0" onAction="#handlePreviewButtonAction" text="Kamenitxania" />
       <MenuBar prefHeight="29.0" prefWidth="470.0">
         <menus>

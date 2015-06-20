@@ -54,7 +54,7 @@ public class Generators {
 			try{
 				String host = "http://eu.battle.net/api/";
 				URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
-						"?fields=guild,items,titles,talents,professions");
+						"?fields=guild,items,titles,talents,professions,progression 	");
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
 				con.setReadTimeout(2000); //2 vteřiny
 				is = con.getInputStream();
@@ -106,6 +106,8 @@ public class Generators {
 		JsonObject professions = jsonObject.getJsonObject("professions");
 		JsonObject primary_prof = professions.getJsonArray("primary").getJsonObject(0);
 		JsonObject secondary_prof = professions.getJsonArray("primary").getJsonObject(1);
+		JsonArray raids = jsonObject.getJsonObject("progression").getJsonArray("raids");
+		setRaidProgress(character, raids);
 
 
 		jsonReader.close();
@@ -141,6 +143,36 @@ public class Generators {
 	}
 
 	/**
+	 * Gets raid progresion info
+	 */
+	private void setRaidProgress(Character ch, JsonArray raids) {
+		ch.nullRaidProgress();
+		for (int i = 32; i <= 33; i++) {
+			JsonObject raid = raids.getJsonObject(i);
+			JsonArray bosses = raid.getJsonArray("bosses");
+			int lfr = 0;
+			int normal = 0;
+			int heroic = 0;
+			int mythic = 0;
+			for (JsonValue boss : bosses) {
+				if (((JsonObject) boss).getInt("lfrKills") > 0) {
+					lfr++;
+				}
+				if (((JsonObject) boss).getInt("normalKills") > 0) {
+					normal++;
+				}
+				if (((JsonObject) boss).getInt("heroicKills") > 0) {
+					heroic++;
+				}
+				if (((JsonObject) boss).getInt("mythicKills") > 0) {
+					mythic++;
+				}
+			}
+			ch.setRaidProgress(i, lfr, normal, heroic, mythic);
+		}
+	}
+
+	/**
 	 * Generates image from character class data a saves it to HDD.
 	 * @param save image is saved to HDD if true
 	 * @return generated image
@@ -150,22 +182,24 @@ public class Generators {
 		URL pp = DataPkg.class.getResource(character.getPrimaryProf() + ".jpeg");
 		URL sp = DataPkg.class.getResource(character.getSecondaryProf() + ".jpeg");
 		String result;
-		BufferedImage image = null, primaryProfImg = null, secondaryProfImg = null;
+		BufferedImage image, bg = null, primaryProfImg = null, secondaryProfImg = null;
 		if (url == null){
 			result = "CHYBA";
 		} else {
 			result = "ok";
 			try {
-				image = ImageIO.read(url);
+				bg = ImageIO.read(url);
 				primaryProfImg = ImageIO.read(pp);
 				secondaryProfImg = ImageIO.read(sp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		Graphics2D g = (Graphics2D) image.getGraphics();
+		image = new BufferedImage(500, 80, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = image.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.drawImage(bg, 0, 0, 450, 80, null);
 		g.setFont(new Font("Helvetica", Font.PLAIN, 28));
 		g.setFont(g.getFont().deriveFont(28f));
 		g.setColor(fontColor);
@@ -179,7 +213,7 @@ public class Generators {
 
 		// white text on bottom line
 		g.setColor(Color.WHITE);
-		g.drawString(String.valueOf(character.getLvl()) ,   5, 77);
+		g.drawString(String.valueOf(character.getLvl()), 5, 77);
 		g.drawString(String.valueOf(character.getIlvl()), 410, 77);
 		g.setFont(g.getFont().deriveFont(14f));
 		g.drawString("lvl " + character.getLvl() + " " + character.getSpec() + " " +
@@ -195,10 +229,33 @@ public class Generators {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		g.drawImage(avatar, 0, 0, 80, 80, null);
-		g.dispose();
 
+		int position = 450;
+		for (Raid raid : character.getRaidProgress().getRaids().values()) {
+			g.setFont(g.getFont().deriveFont(11f));
+			g.setColor(Color.WHITE);
+			g.drawString(raid.name, position + 2, 75);
+			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(1), 1), position, 0, 6, 60, null);
+			g.setColor(Color.GREEN);
+			g.fillRect(position, 60, 6, 2);
+			position = position + 6;
+			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(2), 2), position, 0, 6, 60, null);
+			g.setColor(Color.BLUE);
+			g.fillRect(position, 60, 6, 2);
+			position = position + 6;
+			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(3), 3), position, 0, 6, 60, null);
+			g.setColor(new Color(176, 72, 248));
+			g.fillRect(position, 60, 6, 2);
+			position = position + 6;
+			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(4), 4), position, 0, 6, 60, null);
+			g.setColor(Color.ORANGE);
+			g.fillRect(position, 60, 6, 2);
+			position = position + 6;
+		}
+
+
+		g.dispose();
 		if (save) {
 			try {
 				if (!Objects.equals(folder, "")) {
@@ -214,6 +271,46 @@ public class Generators {
 		}
 		// TODO: Save over scp
 		return image;
+	}
+
+	/**
+	 * Unkilled bosses are gray part of returned image.
+	 * @param raidImg image of raid
+	 * @param progress progress percentage
+	 * @param difficulty 1 to 4 -> lfr to mythic
+	 * @return part of raid image
+	 */
+	private BufferedImage makeRaidProgressImg(BufferedImage raidImg, double progress, int difficulty) {
+		progress = raidImg.getHeight() - ((progress / 100) * raidImg.getHeight());
+		int partsize = (int) progress;
+
+		BufferedImage img = new BufferedImage(raidImg.getWidth(), raidImg.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g= img.createGraphics();
+		g.drawImage(raidImg, 0, 0, null);
+		if (partsize > 0) {
+			BufferedImage grayPart = new BufferedImage(raidImg.getWidth(), partsize, BufferedImage.TYPE_BYTE_GRAY);
+			grayPart.createGraphics().drawImage(raidImg, 0, 0, raidImg.getWidth(), raidImg.getHeight(), null);
+			g.drawImage(grayPart, 0, 0, null);
+			g.setColor(Color.ORANGE);
+			g.drawLine(0, partsize, raidImg.getWidth(), partsize);
+		}
+		switch (difficulty) {
+			case 1: {
+				img = img.getSubimage(0, 0, 6, raidImg.getHeight()); break;
+			}
+			case 2: {
+				img = img.getSubimage(6, 0, 6, raidImg.getHeight()); break;
+			}
+			case 3: {
+				img = img.getSubimage(12, 0, 6, raidImg.getHeight()); break;
+			}
+			case 4: {
+				img = img.getSubimage(18, 0, 6, raidImg.getHeight()); break;
+			}
+		}
+		g.dispose();
+		return img;
+
 	}
 
 	/**

@@ -18,6 +18,7 @@ public class Character {
 	private int race = 0;
 	private int gender = 0;
 	private int achievementPoints = 0;
+	private Progress raidProgress = null;
 
 	public int getRace() {
 		return race;
@@ -145,6 +146,21 @@ public class Character {
 
 	public void setSecondaryProfLvl(int secondaryProfLvl) {
 		this.secondaryProfLvl = secondaryProfLvl;
+	}
+
+	public Progress getRaidProgress() {
+		return raidProgress;
+	}
+
+	public void nullRaidProgress() {
+		raidProgress = null;
+	}
+
+	public void setRaidProgress(int id, int lfr, int normal, int heroic, int mythic) {
+		if (raidProgress == null) {
+			raidProgress = new Progress();
+		}
+		raidProgress.setRaidProgress(id, lfr, normal, heroic, mythic);
 	}
 
 	private Character() {}
