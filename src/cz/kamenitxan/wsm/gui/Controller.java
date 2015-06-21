@@ -5,10 +5,7 @@ import cz.kamenitxan.wsm.Character;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -39,6 +36,10 @@ public class Controller implements Initializable {
 	private ImageView image;
 	@FXML
 	private ColorPicker colorPicker;
+	@FXML
+	private CheckBox progress;
+
+
 
 
 	@FXML
@@ -46,6 +47,10 @@ public class Controller implements Initializable {
 		VistaNavigator.loadVista(VistaNavigator.VISTA_1);
 	}
 
+	@FXML
+	private void handleProgressCheckbox() {
+		generators.setGenerateProgress(progress.isSelected());
+	}
 
 	@FXML
 	private void handlePreviewButtonAction() {

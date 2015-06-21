@@ -27,6 +27,7 @@ public class Generators {
 	private String lastRealm = "";
 	private Color fontColor = new Color(255, 255, 255);
 	private String folder = "";
+	private boolean generateProgress = true;
 
 	private Generators() {
 
@@ -231,29 +232,32 @@ public class Generators {
 		}
 		g.drawImage(avatar, 0, 0, 80, 80, null);
 
-		int position = 450;
-		for (Raid raid : character.getRaidProgress().getRaids().values()) {
-			g.setFont(g.getFont().deriveFont(11f));
-			g.setColor(Color.WHITE);
-			g.drawString(raid.name, position + 2, 75);
-			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(1), 1), position, 0, 6, 60, null);
-			g.setColor(Color.GREEN);
-			g.fillRect(position, 60, 6, 2);
-			position = position + 6;
-			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(2), 2), position, 0, 6, 60, null);
-			g.setColor(Color.BLUE);
-			g.fillRect(position, 60, 6, 2);
-			position = position + 6;
-			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(3), 3), position, 0, 6, 60, null);
-			g.setColor(new Color(176, 72, 248));
-			g.fillRect(position, 60, 6, 2);
-			position = position + 6;
-			g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(4), 4), position, 0, 6, 60, null);
-			g.setColor(Color.ORANGE);
-			g.fillRect(position, 60, 6, 2);
-			position = position + 6;
+		if (generateProgress) {
+			int position = 450;
+			for (Raid raid : character.getRaidProgress().getRaids().values()) {
+				g.setFont(g.getFont().deriveFont(11f));
+				g.setColor(Color.WHITE);
+				g.drawString(raid.name, position + 2, 75);
+				g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(1), 1), position, 0, 6, 60, null);
+				g.setColor(Color.GREEN);
+				g.fillRect(position, 60, 6, 2);
+				position = position + 6;
+				g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(2), 2), position, 0, 6, 60, null);
+				g.setColor(Color.BLUE);
+				g.fillRect(position, 60, 6, 2);
+				position = position + 6;
+				g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(3), 3), position, 0, 6, 60, null);
+				g.setColor(new Color(176, 72, 248));
+				g.fillRect(position, 60, 6, 2);
+				position = position + 6;
+				g.drawImage(makeRaidProgressImg(raid.getImg(), raid.getRaidProgress(4), 4), position, 0, 6, 60, null);
+				g.setColor(Color.ORANGE);
+				g.fillRect(position, 60, 6, 2);
+				position = position + 6;
+			}
+		} else {
+			image = image.getSubimage(0, 0, 450, 80);
 		}
-
 
 		g.dispose();
 		if (save) {
@@ -358,5 +362,13 @@ public class Generators {
 	 */
 	public void setBackgroudImage(String backgroudImage) {
 		this.backgroudImage = backgroudImage;
+	}
+
+	/**
+	 * Sets if raid progress is generated in image
+	 * @param generateProgress
+	 */
+	public void setGenerateProgress(boolean generateProgress) {
+		this.generateProgress = generateProgress;
 	}
 }
