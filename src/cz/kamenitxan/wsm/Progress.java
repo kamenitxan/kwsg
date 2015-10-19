@@ -27,6 +27,12 @@ public class Progress implements Serializable{
 			bosses = 10;
 			imgURL = DataPkg.class.getResource("brf.png");
 		}});
+		raids.put(34, new Raid() {{
+			id = 34;
+			name = "HFC";
+			bosses = 13;
+			imgURL = DataPkg.class.getResource("hfc.png");
+		}});
 	}
 
 	public Raid getRaid(int raid) {

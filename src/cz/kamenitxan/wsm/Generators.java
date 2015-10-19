@@ -148,7 +148,7 @@ public class Generators {
 	 */
 	private void setRaidProgress(Character ch, JsonArray raids) {
 		ch.nullRaidProgress();
-		for (int i = 32; i <= 33; i++) {
+		for (int i = 32; i <= 34; i++) {
 			JsonObject raid = raids.getJsonObject(i);
 			JsonArray bosses = raid.getJsonArray("bosses");
 			int lfr = 0;
@@ -196,7 +196,7 @@ public class Generators {
 				e.printStackTrace();
 			}
 		}
-		image = new BufferedImage(500, 80, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(524, 80, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
