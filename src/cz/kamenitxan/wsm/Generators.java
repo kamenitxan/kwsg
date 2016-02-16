@@ -53,9 +53,9 @@ public class Generators {
 		InputStream is = null;
 		while (is == null) {
 			try{
-				String host = "http://eu.battle.net/api/";
+				String host = "https://eu.api.battle.net/";
 				URL url = new URL(host + "wow/character/" + character.getRealm() + "/" +  character.getName() +
-						"?fields=guild,items,titles,talents,professions,progression 	");
+						"?fields=guild,items,titles,talents,professions,progression,locale=en_GB&apikey=2z9h62epvuq4pe93y6ta266zjchmdd2g");
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
 				con.setReadTimeout(2000); //2 vteřiny
 				is = con.getInputStream();
