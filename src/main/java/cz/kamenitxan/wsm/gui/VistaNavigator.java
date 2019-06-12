@@ -57,18 +57,20 @@ public class VistaNavigator {
 	public static void loadVista(String fxml) {
 		loadVista(fxml, lastLocale);
 	}
+
 	public static void loadVista(String fxml, String language) {
 		lastFxml = fxml;
 		try {
 			Locale locale = new Locale(language);
-			mainController.setVista(FXMLLoader.load(
-							VistaNavigator.class.getResource(fxml),
-							ResourceBundle.getBundle("strings",
-									locale,
-									new EncodedControl("UTF8")
-							)
-					)
-			);
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VistaNavigator.class.getResource(fxml));
+			loader.setResources(ResourceBundle.getBundle("strings",
+					locale,
+					new EncodedControl("UTF8")
+			));
+
+			mainController.setVista(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

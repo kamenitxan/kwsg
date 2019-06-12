@@ -1,6 +1,5 @@
 package cz.kamenitxan.wsm;
 
-import cz.kamenitxan.wsm.images.DataPkg;
 
 
 import javax.imageio.ImageIO;
@@ -22,6 +21,7 @@ public class Generators {
 	private static Generators singleton = new Generators();
 	private static final Lists lists = Lists.getInstance();
 	private Character character = Character.getInstance();
+	private static final String IMGS = "/images/";
 	private String backgroudImage = "1.png";
 	private String lastName = "";
 	private String lastRealm = "";
@@ -179,9 +179,9 @@ public class Generators {
 	 * @return generated image
 	 */
 	public BufferedImage generateImage(boolean save) {
-		URL url = DataPkg.class.getResource(backgroudImage);
-		URL pp = DataPkg.class.getResource(character.getPrimaryProf() + ".jpeg");
-		URL sp = DataPkg.class.getResource(character.getSecondaryProf() + ".jpeg");
+		URL url = this.getClass().getResource(IMGS + backgroudImage);
+		URL pp = this.getClass().getResource(IMGS + character.getPrimaryProf() + ".jpeg");
+		URL sp = this.getClass().getResource(IMGS + character.getSecondaryProf() + ".jpeg");
 		String result;
 		BufferedImage image, bg = null, primaryProfImg = null, secondaryProfImg = null;
 		if (url == null){

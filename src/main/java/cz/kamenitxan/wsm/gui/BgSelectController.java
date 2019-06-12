@@ -1,7 +1,6 @@
 package cz.kamenitxan.wsm.gui;
 
 import cz.kamenitxan.wsm.Generators;
-import cz.kamenitxan.wsm.images.DataPkg;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -44,7 +43,7 @@ public class BgSelectController implements Initializable{
 		ImageView image;
 
 		for (int i = 1; i <= 10; i++) {
-			url = DataPkg.class.getResource(i + ".png");
+			url = this.getClass().getResource("/images/" + i + ".png");
 			image = new ImageView(String.valueOf(url));
 			image.setId(String.valueOf(i));
 			bgvbox.getChildren().add(image);

@@ -1,6 +1,5 @@
 package cz.kamenitxan.wsm;
 
-import cz.kamenitxan.wsm.images.DataPkg;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -12,6 +11,7 @@ import java.util.Map;
  */
 public class Progress implements Serializable{
 	Map<Integer, Raid> raids = null;
+	private static final String IMGS = "/images/";
 
 	public Progress() {
 		raids = new HashMap<>();
@@ -19,19 +19,19 @@ public class Progress implements Serializable{
 			id = 32;
 			name = "HM";
 			bosses = 7;
-			imgURL = DataPkg.class.getResource("hm.png");
+			imgURL = this.getClass().getResource(IMGS + "hm.png");
 		}});
 		raids.put(33, new Raid() {{
 			id = 33;
 			name = "BFR";
 			bosses = 10;
-			imgURL = DataPkg.class.getResource("brf.png");
+			imgURL =this.getClass().getResource(IMGS + "brf.png");
 		}});
 		raids.put(34, new Raid() {{
 			id = 34;
 			name = "HFC";
 			bosses = 13;
-			imgURL = DataPkg.class.getResource("hfc.png");
+			imgURL = this.getClass().getResource(IMGS + "hfc.png");
 		}});
 	}
 
