@@ -83,7 +83,7 @@ public class Generators {
 				alert.setHeaderText("50x: Chyba v API");
 				alert.setContentText(error);
 				alert.showAndWait();
-
+				ex.printStackTrace();
 				return error;
 			} catch (Exception ex) {
 				ex.printStackTrace();

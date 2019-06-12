@@ -45,7 +45,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 
 		Pane mainPane = loader.load(
-				VistaNavigator.class.getResourceAsStream(VistaNavigator.MAIN)
+				this.getClass().getResourceAsStream(VistaNavigator.MAIN)
 		);
 		MainController mainController = loader.getController();
 

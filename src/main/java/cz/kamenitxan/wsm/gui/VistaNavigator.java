@@ -18,9 +18,9 @@ public class VistaNavigator {
 	/**
 	 * Convenience constants for fxml layouts managed by the navigator.
 	 */
-	public static final String MAIN = "main.fxml";
-	public static final String VISTA_1 = "bgselect.fxml";
-	public static final String VISTA_2 = "gui.fxml";
+	public static final String MAIN = "/main.fxml";
+	public static final String VISTA_1 = "/bgselect.fxml";
+	public static final String VISTA_2 = "/gui.fxml";
 	private static String lastFxml = "";
 	private static String lastLocale = "cs";
 	/**
@@ -63,7 +63,7 @@ public class VistaNavigator {
 			Locale locale = new Locale(language);
 			mainController.setVista(FXMLLoader.load(
 							VistaNavigator.class.getResource(fxml),
-							ResourceBundle.getBundle("cz.kamenitxan.wsm.gui.lang.strings",
+							ResourceBundle.getBundle("strings",
 									locale,
 									new EncodedControl("UTF8")
 							)
